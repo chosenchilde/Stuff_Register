@@ -18,7 +18,8 @@ public class Cadastro_de_trecos {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-      mainMenu();
+        clearScreen();
+        mainMenu();
     }
     
     public static void mainMenu (){
@@ -89,6 +90,7 @@ public class Cadastro_de_trecos {
     // Recarrega o menu.
     public static void reloadMenu() {
     clearScreen();
+    System.out.println("Opção errada");
     mainMenu();
     }
     
@@ -97,6 +99,5 @@ public class Cadastro_de_trecos {
         for(int i = 0; i < 100; i++){
         System.out.println("\n");
         }
-    
     }
   }
