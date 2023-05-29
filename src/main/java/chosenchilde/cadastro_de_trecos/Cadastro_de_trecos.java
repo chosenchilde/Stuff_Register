@@ -1,5 +1,6 @@
 package chosenchilde.cadastro_de_trecos;
 
+import chosenchilde.cadastro_de_trecos.crud.Create;
 import chosenchilde.cadastro_de_trecos.crud.Delete;
 import chosenchilde.cadastro_de_trecos.setup.AppSetup;
 import chosenchilde.cadastro_de_trecos.crud.Read;
@@ -40,8 +41,9 @@ public class Cadastro_de_trecos extends AppSetup {
                 clearScreen();
                 Read.read();
             }
-            case "3" ->
-                newThing();
+            case "3" ->{
+                clearScreen();
+                Create.create();}
             case "4" ->
                 editThing();
             case "5" -> {
