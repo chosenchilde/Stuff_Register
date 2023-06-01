@@ -9,7 +9,7 @@ import chosenchilde.cadastro_de_trecos.setup.AppSetup;
 public class ChangeStatus extends AppSetup {
 
     public static void changeStatus() {
-        
+        // Reserva recursos para o banco de dados. 
         int id = 0;
         String sql;
 
@@ -27,9 +27,9 @@ public class ChangeStatus extends AppSetup {
                 clearScreen();
                 mainMenu();
             }
-        } catch (NumberFormatException e) {
-
+        } 
             // Quando opção solicitada é inválida.
+            catch (NumberFormatException e) {
             clearScreen();
             System.out.println("A opção inserida é inválida.\n");
             changeStatus();
@@ -50,19 +50,21 @@ public class ChangeStatus extends AppSetup {
 
                 // Exibe na visualização do usuário caso ele encontre o registro informado.
                 showRes(res);
-
                 String updateStatus;
 
+                // Caso o objeto solicitado tenha o status igual a UM, ou seja, bloqueado, exibe:
                 if (res.getString("status").equals("1")) {
                     updateStatus = "2";
                     System.out.print("O registro solicitado será ATIVADO, tem certeza que deseja fazer isso? [s/N] ");
-                } else {
+                } // Caso o objeto solicitado tenha o statos igual a DOIS, ou seja, desbloqueado, exibe:
+                    else {
                     updateStatus = "1";
                     System.out.print("O registro solicitado será BLOQUEADO, tem certeza que deseja fazer isso? o registro? [s/N] ");
                 }
-
+                // Coleta do usuário, caso a resposta seja sim = "s". 
                 if (scanner.next().trim().toLowerCase().equals("s")) {
 
+                    // Atualiza no banco de dados o STATUS do objeto inserido. anteriormente.
                     sql = "UPDATE " + DBTABLE + " SET status = ? WHERE id = ?";
                     pstm = conn.prepareStatement(sql);
                     pstm.setString(1, updateStatus);
@@ -73,20 +75,24 @@ public class ChangeStatus extends AppSetup {
                         } else {
                             System.out.println("\nO registro solicitado foi ATIVADO.!");
                         }
-                    } else {
+                    } // Mensagem de erro.
+                        else {
                         System.out.println("Ocorreu um erro.");
                     }
                 } else {
                     System.out.println("\nNada aconteceu.");
                 }
 
-            } else {
+            } // Caso o ID inserido não seja encontrado no banco de dados.  
+            else {
                 clearScreen();
                 System.out.println("Não encontrei nenhum objeto com o ID inserido.\n");
                 changeStatus();
             }
-
+            // Fecha a conexão com o banco de dados..
             DbConnection.dbClose(res, stmt, pstm, conn);
+            
+            // Exibe o menu secundário do aplicativo para o usuário.
             System.out.println(appSep);
             System.out.println("Menu:\n\t[1] Menu principal\n\t[2] Alterar outro item\n\t[0] Sair");
             System.out.println(appSep);        
