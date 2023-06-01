@@ -18,11 +18,7 @@ public class DbConnection extends AppSetup {
         try {
 
             // Conecta ao banco de dados usando o driver JDBC adequado.
-            Connection conn = DriverManager.getConnection(
-                    HOSTNAME + DATABASE,
-                    USERNAME,
-                    PASSWORD
-            );
+            Connection conn = DriverManager.getConnection(MYSQLURL);
 
             // Se a conexão foi estabelecida, retorna ela.
             if (conn != null) {

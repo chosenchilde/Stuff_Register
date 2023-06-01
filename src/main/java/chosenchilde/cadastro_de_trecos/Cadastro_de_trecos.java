@@ -1,9 +1,12 @@
 package chosenchilde.cadastro_de_trecos;
 
+import chosenchilde.cadastro_de_trecos.crud.Update;
 import chosenchilde.cadastro_de_trecos.crud.Create;
 import chosenchilde.cadastro_de_trecos.crud.Delete;
 import chosenchilde.cadastro_de_trecos.setup.AppSetup;
 import chosenchilde.cadastro_de_trecos.crud.Read;
+import chosenchilde.cadastro_de_trecos.crud.Search;
+import chosenchilde.cadastro_de_trecos.crud.ChangeStatus;
 
 public class Cadastro_de_trecos extends AppSetup {
 
@@ -22,6 +25,8 @@ public class Cadastro_de_trecos extends AppSetup {
         System.out.println("\t[3] Novo");
         System.out.println("\t[4] Editar");
         System.out.println("\t[5] Apagar");
+        System.out.println("\t[6] Procurar");
+        System.out.println("\t[7] Alterar Status");
         System.out.println("\t[0] Sair");
         System.out.println(appSep);
         System.out.print("Opção: ");
@@ -29,29 +34,42 @@ public class Cadastro_de_trecos extends AppSetup {
         // Recebe a opção do teclado.
         String option = scanner.next();
 
-        // Executa um método conforme a opção escolhida.
         switch (option) {
-            case "0" ->
+            case "0":
                 exitProgram();
-            case "1" -> {
+                break;
+            case "1":
                 clearScreen();
                 Read.readAll();
-            }
-            case "2" -> {
+                break;
+            case "2":
                 clearScreen();
                 Read.read();
-            }
-            case "3" ->{
+                break;
+            case "3":
                 clearScreen();
-                Create.create();}
-            case "4" ->
-                editThing();
-            case "5" -> {
+                Create.create();
+                break;
+            case "4":
+                clearScreen();
+                Update.update();
+                break;
+            case "5":
                 clearScreen();
                 Delete.delete();
-            }
-            default ->
-                reloadMenu();
+                break;
+            case "6":
+                clearScreen();
+                Search.search();
+                break;
+            case "7":
+                clearScreen();
+                ChangeStatus.changeStatus();
+                break;
+            default:
+                clearScreen();
+                System.out.println("Oooops! Opção inválida!\n");
+                mainMenu();
         }
     }
 
@@ -63,20 +81,6 @@ public class Cadastro_de_trecos extends AppSetup {
         System.exit(0);
     }
 
-    // Cadastra um novo treco.
-    public static void newThing() {
-    }
-
-    // Edita um treco pelo Id.
-    public static void editThing() {
-    }
-
-    // Recarrega o menu principal.
-    public static void reloadMenu() {
-        clearScreen(); // Limpa o terminal.
-        System.out.println("Oooops! Opção inválida!\n");
-        mainMenu();    // Mostra o menu.
-    }
 
     // Limpa a tela do terminal.
     public static void clearScreen() {

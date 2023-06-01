@@ -26,15 +26,19 @@ public class Create extends AppSetup {
 
             System.out.print("\tDescrição: ");
             String itemDescription = keyboard.nextLine().trim();
+            
+            System.out.print("\tLocalização: ");
+            String itemLocation = keyboard.nextLine().trim();
 
             System.out.print("\nOs dados acima estão corretos? [s/N] ");
             if (keyboard.next().trim().toLowerCase().equals("s")) {
 
-                sql = "INSERT INTO " + DBTABLE + " (name, description) VALUES (?, ?)";
+                sql = "INSERT INTO " + DBTABLE + " (nome, descricao, localizacao) VALUES (?, ?, ?)";
                 conn = DbConnection.dbConnect();
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, itemName);
                 pstm.setString(2, itemDescription);
+                pstm.setString(3, itemLocation);
                 if (pstm.executeUpdate() == 1) {
                     System.out.println("\nRegistro cadastrado!");
                 } else {
@@ -57,25 +61,23 @@ public class Create extends AppSetup {
             System.out.print("Opção: ");
             String option = scanner.next();
 
-            // Executa conforme a opção.
             switch (option) {
-                case "0" ->
+                case "0":
                     exitProgram();
-                case "1" -> {
+                    break;
+                case "1":
                     clearScreen();
                     mainMenu();
-                }
-                case "2" -> {
+                    break;
+                case "2":
                     clearScreen();
                     create();
-                }
-                default -> {
+                    break;
+                default:
                     clearScreen();
                     System.out.println("Oooops! Opção inválida!\n");
                     create();
-                }
             }
-
         } catch (SQLException error) {
 
             // Tratamento de erros.
